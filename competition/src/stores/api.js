@@ -17,10 +17,19 @@ axiosInstance.interceptors.request.use((config) => {
 
 export async function isAuthenticated() {
     try {
-        const response = await axiosInstance.get('/check');
+        const response = await axiosInstance.get('/profile');
         return response.data.success;
     } catch(err) {
         return false;
+    }
+}
+
+export async function getUser() {
+    try {
+        const response = await axiosInstance.get('/profile');
+        return response.data.data;
+    } catch(err) {
+        throw err;
     }
 }
 

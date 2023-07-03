@@ -4,6 +4,7 @@ const cors = require('cors');
 const app = express();
 const passport = require('passport');
 const mongoose = require('./utils/mongodb');
+const Users = require('./models/Users');
 
 const allowedOrigins = ['http://localhost:5173',
                       'localhost:3000'];
@@ -44,8 +45,17 @@ app.use("/api/v1", requireAuth, (req, res, next) => {
     next();
 });
 
-app.use("/api/v1/check", (req, res, next) => {
-    return res.json({success: true, message: "You are authenticated!"});
+app.use("/api/v1/profile", async (req, res, next) => {
+    const user = await Users.findById(req.user.id);
+    if(!user) {
+        return res.json({success: false, message: "You are not logged in!"});
+    }
+    return res.json({success: true, message: "You are authenticated!", data: {
+        email: user.email,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        phoneNumber: user.phoneNumber
+    }});
 });
 
 app.get("/api/v1/test", passport.authenticate('jwt', { session: false }),  (req, res) => {

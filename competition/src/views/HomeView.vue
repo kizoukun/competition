@@ -1,5 +1,7 @@
 <script setup>
 import { logout } from '@/stores/api';
+import { useUserStore } from '@/stores/globalVars';
+const user = useUserStore();
 </script>
 
 <template>
@@ -10,10 +12,10 @@ import { logout } from '@/stores/api';
         <p class="text-red-500 text-sm font-medium">Low Balance</p>
       </div>
       <div class="flex justify-center items-center">
-        <p>Pay</p>
+        <p>{{ user.getUser.firstName }}</p>
       </div>
       <div class="flex justify-center items-center">
-        <p>Topup</p>
+        <p>{{ user.getUser.lastName }}</p>
       </div>
       <div class="flex justify-center items-center">
         <p>Explore</p>

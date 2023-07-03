@@ -1,14 +1,26 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
 import NavigationBar from "@/components/NavigationBar.vue";
+import { useUserStore } from "@/stores/globalVars";
+import { onMounted, ref } from "vue";
+import { getUser } from "@/stores/api";
+
+const user = useUserStore()
+const loading = ref(true);
+onMounted(async () => {
+  if(user.getUser == null) {
+    user.setUser(await getUser());
+  }
+  loading.value = false;
+})
 </script>
 
 <template>
-  <div class="max-w-[600px] mx-auto min-h-screen w-full bg-white flex flex-col">
+  <div class="max-w-[600px] mx-auto min-h-screen w-full bg-white flex flex-col" v-if="!loading">
     <section>
       <NavigationBar />
     </section>
-    <section class="flex-1 mt-[60px]">
+    <section class="flex-1 mt-[65px]">
       <RouterView />
     </section>
     <section>
