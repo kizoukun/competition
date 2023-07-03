@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
-import LoginView from '../views/auth/LoginView.vue'
+import HomeView from '@/views/HomeView.vue'
+import LoginView from '@/views/auth/LoginView.vue'
+import RegisterView from "@/views/auth/RegisterView.vue";
 import { isAuthenticated } from '@/stores/api';
 
 const router = createRouter({
@@ -29,12 +30,28 @@ const router = createRouter({
       }
     },
     {
+        path: '/auth/register',
+        name: 'register',
+        component: RegisterView,
+        beforeEnter: async (to, from, next) => {
+            if(await isAuthenticated()) {
+                return next({name: 'home'});
+            }
+            next();
+        }
+    },
+    {
       path: '/about',
       name: 'about',
       // route level code-splitting
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
       component: () => import('../views/AboutView.vue')
+    },
+    {
+        path: "/:pathMatch(.*)*",
+        name: "notFound",
+        component: () => import('@/components/NotFound.vue')
     }
   ]
 })
