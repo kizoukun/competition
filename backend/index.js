@@ -1,6 +1,9 @@
+require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const app = express();
+const passport = require('passport');
+const mongoose = require('./utils/mongodb');
 
 const allowedOrigins = ['http://localhost:5173',
                       'localhost:3000'];
@@ -13,16 +16,42 @@ app.use(cors({
     }
     return callback(null, true);
   }
-
 }));
+app.use(express.json());
+app.use(express.urlencoded({extended: true}));
+const initializePassportJwt = require('./utils/passportJwt');
+initializePassportJwt(passport);
+app.use(passport.initialize());
 
-app.get("/", (req, res) => {
+const authRouter = require('./routers/auth');
+app.use("/api/v1/auth", authRouter);
+
+
+const requireAuth = (req, res, next) => {
+    passport.authenticate('jwt', { session: false }, (err, user, info) => {
+        if(err) {
+            return next(err);
+        }
+        if(!user) {
+            return res.json({success: false, message: "You are not logged in!"});
+        }
+        req.user = user;
+        return next();
+    })(req, res, next);
+}
+
+app.use("/api/v1", requireAuth, (req, res, next) => {
+    next();
+});
+
+app.use("/api/v1/check", (req, res, next) => {
+    return res.json({success: true, message: "You are authenticated!"});
+});
+
+app.get("/api/v1/test", passport.authenticate('jwt', { session: false }),  (req, res) => {
     res.json({success: true, message: "Hello World!"});
 });
 
-app.post("/api/v1/auth/login", (req, res) => {
-    return res.json({success: true, message: "Login successful!"});
-})
 
 app.listen(3000, () => {
     console.log("LISTENING ON PORT 3000")
