@@ -1,5 +1,6 @@
 <script setup>
 import { ref } from 'vue';
+import router from '@/router';
 import api from '@/stores/api';
 defineOptions({
   name: 'RegisterView',
@@ -21,7 +22,7 @@ async function register() {
       .then(response => {
         console.log(response.data);
         if(response.data.success) {
-          console.log("succes register")
+          router.push('/auth/login');
         } else {
           error.value = response.data.message;
         }

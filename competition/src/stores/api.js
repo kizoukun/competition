@@ -17,7 +17,7 @@ axiosInstance.interceptors.request.use((config) => {
 
 export async function isAuthenticated() {
     try {
-        const response = await axiosInstance.get('/profile');
+        const response = await axiosInstance.get('/user');
         return response.data.success;
     } catch(err) {
         return false;
@@ -26,7 +26,7 @@ export async function isAuthenticated() {
 
 export async function getUser() {
     try {
-        const response = await axiosInstance.get('/profile');
+        const response = await axiosInstance.get('/user');
         return response.data.data;
     } catch(err) {
         throw err;

@@ -5,6 +5,7 @@ const app = express();
 const passport = require('passport');
 const mongoose = require('./utils/mongodb');
 const Users = require('./models/Users');
+const BalanceHistory = require('./models/BalanceHistory');
 
 const allowedOrigins = ['http://localhost:5173',
                       'localhost:3000'];
@@ -45,7 +46,7 @@ app.use("/api/v1", requireAuth, (req, res, next) => {
     next();
 });
 
-app.use("/api/v1/profile", async (req, res, next) => {
+app.get("/api/v1/user", async (req, res) => {
     const user = await Users.findById(req.user.id);
     if(!user) {
         return res.json({success: false, message: "You are not logged in!"});
@@ -57,6 +58,14 @@ app.use("/api/v1/profile", async (req, res, next) => {
         phoneNumber: user.phoneNumber
     }});
 });
+
+
+app.get("/api/v1/user/balance", async (req, res) => {
+    const balance = await BalanceHistory.findOne({userId: req.user.id}).sort({createdAt: -1}).limit(1);
+    return res.json({success: true, message: "Getting balance", data: {
+        balance: balance.balanceAfter,
+    }});
+})
 
 app.get("/api/v1/test", passport.authenticate('jwt', { session: false }),  (req, res) => {
     res.json({success: true, message: "Hello World!"});

@@ -3,6 +3,7 @@ const router = express.Router();
 const jwt = require('jsonwebtoken');
 const Users = require('../models/Users');
 const Tokens = require('../models/Tokens');
+const BalanceHistory = require('../models/BalanceHistory');
 const bcrypt = require('bcrypt');
 
 router.post("/login", async(req, res) => {
@@ -51,7 +52,16 @@ router.post("/register", async (req, res) => {
         phoneNumber: body.phoneNumber
     });
     try {
-        await user.save()
+        await user.save();
+        await (new BalanceHistory({
+            userId: user._id,
+            userEmail: user.email,
+            balanceBefore: 0,
+            balanceAfter: 0,
+            amount: 0,
+            type: 1,
+            description: "Register",
+        }).save());
     } catch (err) {
         return res.json({success: false, message: "Register failed!", error: err.message});
     }
