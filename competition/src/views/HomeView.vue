@@ -10,11 +10,11 @@ onMounted(async () => {
 })
 </script>
 
-<template >
+<template>
   <section>
     <NavigationBar />
   </section>
-  <section class="flex-1 pt-[65px]">
+  <section class="pt-[65px]">
     <div class="p-3 space-y-4 min-h-screen flex flex-col">
       <div class="bg-blue-500 rounded-xl p-3 text-white grid grid-cols-5 gap-5">
         <div class="col-span-2 bg-white text-black p-2 rounded-lg font-medium">

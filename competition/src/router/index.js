@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '@/views/HomeView.vue'
 import LoginView from '@/views/auth/LoginView.vue'
 import RegisterView from "@/views/auth/RegisterView.vue";
+import NotFound from "@/components/NotFound.vue";
 import { isAuthenticated } from '@/stores/api';
 
 const router = createRouter({
@@ -48,12 +49,30 @@ const router = createRouter({
     {
       path: '/topup',
       name: 'topup',
-      component: () => import('../views/TopupView.vue')
+      component: () => import('../views/TopupView.vue'),
+        beforeEnter: async (to, from, next) => {
+            if(!await isAuthenticated()) {
+                return next({name: 'login'});
+            }
+            next();
+        }
+    },
+    {
+      path: '/topup/:id',
+      name: 'topupId',
+      component: () => import('../views/PayView.vue'),
+      beforeEnter: async (to, from, next) => {
+          if(!await isAuthenticated()) {
+              return next({name: 'login'});
+          }
+          next();
+      }
     },
     {
         path: "/:pathMatch(.*)*",
         name: "notFound",
-        component: () => import('@/components/NotFound.vue')
+        component: NotFound,
+        props: route => ({ message: route.query.message })
     }
   ]
 })

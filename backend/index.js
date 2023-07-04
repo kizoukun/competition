@@ -42,30 +42,12 @@ const requireAuth = (req, res, next) => {
     })(req, res, next);
 }
 
-app.use("/api/v1", requireAuth, (req, res, next) => {
-    next();
-});
+app.use("/api/v1", requireAuth);
 
-app.get("/api/v1/user", async (req, res) => {
-    const user = await Users.findById(req.user.id);
-    if(!user) {
-        return res.json({success: false, message: "You are not logged in!"});
-    }
-    return res.json({success: true, message: "You are authenticated!", data: {
-        email: user.email,
-        firstName: user.firstName,
-        lastName: user.lastName,
-        phoneNumber: user.phoneNumber
-    }});
-});
-
-
-app.get("/api/v1/user/balance", async (req, res) => {
-    const balance = await BalanceHistory.findOne({userId: req.user.id}).sort({createdAt: -1}).limit(1);
-    return res.json({success: true, message: "Getting balance", data: {
-        balance: balance.balanceAfter,
-    }});
-})
+const usersRouter = require('./routers/users');
+const transactionsRouter = require('./routers/transactions');
+app.use("/api/v1/user", usersRouter);
+app.use("/api/v1/transactions", transactionsRouter);
 
 app.get("/api/v1/test", passport.authenticate('jwt', { session: false }),  (req, res) => {
     res.json({success: true, message: "Hello World!"});

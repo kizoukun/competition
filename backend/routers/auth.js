@@ -53,15 +53,7 @@ router.post("/register", async (req, res) => {
     });
     try {
         await user.save();
-        await (new BalanceHistory({
-            userId: user._id,
-            userEmail: user.email,
-            balanceBefore: 0,
-            balanceAfter: 0,
-            amount: 0,
-            type: 1,
-            description: "Register",
-        }).save());
+        await BalanceHistory.addUserBalance(user._id, 0, "Register");
     } catch (err) {
         return res.json({success: false, message: "Register failed!", error: err.message});
     }
