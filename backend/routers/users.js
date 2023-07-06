@@ -1,4 +1,5 @@
 const express = require('express');
+const crypto = require('crypto');
 const router = express.Router();
 const Users = require('../models/Users');
 const BalanceHistory = require('../models/BalanceHistory');
@@ -8,11 +9,13 @@ router.get("/", async (req, res) => {
     if(!user) {
         return res.json({success: false, message: "You are not logged in!"});
     }
+    const emailMd5 = crypto.createHash("md5").update(user.email).digest("hex");
     return res.json({success: true, message: "You are authenticated!", data: {
             email: user.email,
             firstName: user.firstName,
             lastName: user.lastName,
-            phoneNumber: user.phoneNumber
+            phoneNumber: user.phoneNumber,
+            image: emailMd5
         }});
 });
 
