@@ -1,7 +1,7 @@
 <template>
 
   <nav
-      class="bg-green-600 fixed max-w-[600px] w-full mx-auto z-20 top-0 border-b border-gray-600 text-white p-3"
+      class="bg-[#0F827B] fixed max-w-[600px] w-full mx-auto z-20 top-0 border-b border-gray-600 text-white p-3"
       @click="toggleSearchBar"
       :class="{ 'active': isSearchBarActive }"
   >
