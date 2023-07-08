@@ -1,5 +1,6 @@
 <script setup>
 import { ref } from 'vue';
+import PrimaryLayout from "@/layouts/primary.vue";
 const amountTopup = ref(null);
 const paymentType = ref(null);
 const error = ref(null);
@@ -43,18 +44,13 @@ async function topup() {
     loading.value = false;
     return;
   }
-  console.log("TOPUP")
 }
 
 </script>
 
 <template>
-  <div class="flex flex-col p-3 min-h-screen">
+  <PrimaryLayout page-title="Topup">
     <section class="flex-1 space-y-4">
-      <div class="flex gap-4">
-        <router-link to="/"><font-awesome-icon icon="fa-solid fa-arrow-left-long"></font-awesome-icon></router-link>
-        <h1>Topup</h1>
-      </div>
       <div>
         <h1 class="text-lg">Choose an amount</h1>
         <div class="grid grid-cols-3 gap-5">
@@ -86,5 +82,5 @@ async function topup() {
         Topup
       </button>
     </section>
-  </div>
+  </PrimaryLayout>
 </template>

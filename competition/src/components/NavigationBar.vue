@@ -23,7 +23,7 @@
         </span>
       </div>
       <div class="flex justify-center items-center bg-white rounded-full overflow-hidden w-11 h-11">
-        <img :src="'https://www.gravatar.com/avatar/' + useUserStore().getUser.image + `?time=${Date.now()}`" alt="Profile Picture" class="w-full h-full object-cover rounded-full">
+        <img :src="'https://www.gravatar.com/avatar/' + useUserStore()?.getUser?.image + `?time=${Date.now()}`" alt="Profile Picture" class="w-full h-full object-cover rounded-full">
       </div>
     </div>
   </nav>

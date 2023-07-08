@@ -1,26 +1,20 @@
 <script setup>
+import SecondaryLayout from '@/layouts/secondary.vue';
 import { logout } from '@/stores/api';
 import { useUserStore } from '@/stores/globalVars';
-import {onMounted, ref} from "vue";
-import NavigationBar from "@/components/NavigationBar.vue";
+import {onMounted, ref, defineOptions} from "vue";
+defineOptions({
+  layout: SecondaryLayout
+})
 const user = useUserStore();
 const balance = ref(null);
 onMounted(async () => {
   balance.value = await user.getBalance;
 })
-
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
-import { library } from '@fortawesome/fontawesome-svg-core';
-import { faTrain, faBus, faSubway, faCirclePlus, faCreditCard } from '@fortawesome/free-solid-svg-icons';
-
-library.add(faTrain, faBus, faSubway, faCirclePlus, faCreditCard);
 </script>
 
 <template>
-  <section>
-    <NavigationBar />
-  </section>
-  <section class="pt-[65px]">
+  <SecondaryLayout>
     <div class="p-3 space-y-4 min-h-screen flex flex-col">
       <div class="bg-[#0F827B] rounded-xl p-3 text-white grid grid-cols-5 gap-5">
         <div class="col-span-2 bg-white text-black p-2 rounded-lg font-medium">
@@ -70,27 +64,9 @@ library.add(faTrain, faBus, faSubway, faCirclePlus, faCreditCard);
           </div>
         </div>
       </div>
-<!--      <button type="button" class="bg-red-500 p-2 px-4 rounded-lg text-white" @click="logout">Logout</button>-->
+      <button type="button" class="bg-red-500 p-2 px-4 rounded-lg text-white" @click="logout">Logout</button>
     </div>
-  </section>
-  <section id="mobilebar">
-    <div class="block fixed bottom-0 w-full bg-[#0F827B] p-6 z-50 max-w-[600px] mx-auto text-black">
-      <div class="grid grid-cols-4 bg-[#E8FCFC] p-5 rounded-3xl">
-        <div class="flex justify-center items-center bg-white rounded-2xl p-2">
-          <h1>Home</h1>
-        </div>
-        <div class="flex justify-center items-center active:bg-white rounded-2xl p-2">
-          <h1>Promos</h1>
-        </div>
-        <div class="flex justify-center items-center active:bg-white rounded-2xl p-2">
-          <h1>Orders</h1>
-        </div>
-        <div class="flex justify-center items-center active:bg-white rounded-2xl p-2">
-          <h1>Chat</h1>
-        </div>
-      </div>
-    </div>
-  </section>
+  </SecondaryLayout>
 </template>
 
 <style scoped>
