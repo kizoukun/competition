@@ -1,7 +1,6 @@
 <script setup>
 import {onMounted, ref} from 'vue';
 import { useRouter } from "vue-router";
-import PrimaryLayout from "@/layouts/primary.vue";
 import NotFound from "@/components/NotFound.vue";
 import api from "@/stores/api";
 // console.log(this.$route.params)

@@ -1,11 +1,7 @@
 <script setup>
-import SecondaryLayout from '@/layouts/secondary.vue';
 import { logout } from '@/stores/api';
 import { useUserStore } from '@/stores/globalVars';
 import {onMounted, ref, defineOptions} from "vue";
-defineOptions({
-  layout: SecondaryLayout
-})
 const user = useUserStore();
 const balance = ref(null);
 onMounted(async () => {

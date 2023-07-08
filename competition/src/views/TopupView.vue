@@ -1,6 +1,5 @@
 <script setup>
 import { ref } from 'vue';
-import PrimaryLayout from "@/layouts/primary.vue";
 const amountTopup = ref(null);
 const paymentType = ref(null);
 const error = ref(null);
