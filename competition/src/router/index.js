@@ -4,6 +4,8 @@ import LoginView from '@/views/auth/LoginView.vue'
 import RegisterView from "@/views/auth/RegisterView.vue";
 import NotFound from "@/components/NotFound.vue";
 import { isAuthenticated } from '@/stores/api';
+import KRLView from "@/views/KRLView.vue";
+import MRTView from "@/views/MRTView.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -73,7 +75,17 @@ const router = createRouter({
         name: "notFound",
         component: NotFound,
         props: route => ({ message: route.query.message })
-    }
+    },
+      {
+          path: '/krl',
+          name: 'KRLView',
+          component: KRLView
+      },
+      {
+          path: '/mrt',
+          name: 'MRTView',
+          component: MRTView
+      }
   ]
 })
 
