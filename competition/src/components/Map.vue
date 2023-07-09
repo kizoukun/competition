@@ -1,16 +1,18 @@
 <template>
-  <div class="map-container" ref="mapContainer"></div>
+  <div class="map-container max-w-[600px] h-[600px] mt-4" ref="mapContainer"></div>
 </template>
 
 <script setup>
+//some information, you have to reload the page the see the actual change, because the map is not reactive
 import {onMounted, onUnmounted, ref} from "vue";
+import mapboxGl from 'mapbox-gl';
 
 const mapContainer = ref(null);
 const map = ref(null);
 
 onMounted(() => {
-  mapboxgl.accessToken = 'pk.eyJ1IjoiaXJmYW5zYWZ4IiwiYSI6ImNsanU2OXgwNDEyMnMzaW5naHVwZzIzZnMifQ.W8qR7DfmEEhwdvpWR6BEpA';
-  map.value = new mapboxgl.Map({
+  mapboxGl.accessToken = 'pk.eyJ1IjoiaXJmYW5zYWZ4IiwiYSI6ImNsanU2OXgwNDEyMnMzaW5naHVwZzIzZnMifQ.W8qR7DfmEEhwdvpWR6BEpA';
+  map.value = new mapboxGl.Map({
     container: mapContainer.value,
     style: 'mapbox://styles/mapbox/streets-v11',
     center: [106.865036, -6.175110],
@@ -67,16 +69,3 @@ onUnmounted(() => {
   map.value.remove();
 });
 </script>
-
-<style scoped>
-.map-container {
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  margin-top: 30px;
-  height: 600px;
-  max-width: 600px;
-  overflow: visible;
-}
-</style>
