@@ -1,5 +1,5 @@
 <template>
-  <div class="map-container max-w-[600px] h-[600px] mt-4" ref="mapContainer"></div>
+  <div class="map-container max-w-[600px] min-h-screen mt-4" ref="mapContainer"></div>
 </template>
 
 <script setup>
@@ -16,7 +16,7 @@ onMounted(() => {
     container: mapContainer.value,
     style: 'mapbox://styles/mapbox/streets-v11',
     center: [106.865036, -6.175110],
-    zoom: 5
+    zoom: 12
   });
 
   // Add code here to display the KRL route on the map using mapbox-gl
