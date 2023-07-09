@@ -23,7 +23,7 @@
         </span>
       </div>
       <div class="flex justify-center items-center bg-white rounded-full overflow-hidden w-11 h-11">
-        <img :src="'https://www.gravatar.com/avatar/' + useUserStore()?.getUser?.image + `?time=${Date.now()}`" alt="Profile Picture" class="w-full h-full object-cover rounded-full">
+        <img @click="logout" :src="'https://www.gravatar.com/avatar/' + useUserStore()?.getUser?.image + `?time=${Date.now()}`" alt="Profile Picture" class="w-full h-full object-cover rounded-full">
       </div>
     </div>
   </nav>
@@ -33,6 +33,7 @@ import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { fas } from "@fortawesome/free-solid-svg-icons";
 import { useUserStore } from "@/stores/globalVars";
+import { logout } from '@/stores/api';
 
 library.add(fas);
 

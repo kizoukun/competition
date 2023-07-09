@@ -29,9 +29,9 @@ export default defineComponent({
 </script>
 <template>
   <div :class="{'p-3': !removePadding }" class="flex flex-col min-h-screen">
-    <div :class="{'p-3': removePadding }" class="flex gap-4">
+    <div :class="{'p-3': removePadding }" class="flex items-center gap-4">
       <router-link :to="backLink"><font-awesome-icon icon="fa-solid fa-arrow-left-long"></font-awesome-icon></router-link>
-      <h1>{{  pageTitle }}</h1>
+      <p class="text-lg font-medium">{{  pageTitle }}</p>
     </div>
     <Spinner v-if="isLoading" />
     <slot v-if="!isLoading" />
