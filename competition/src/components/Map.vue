@@ -3,7 +3,6 @@
 </template>
 
 <script setup>
-import mapboxgl from 'mapbox-gl/dist/mapbox-gl.js';
 import {onMounted, onUnmounted, ref} from "vue";
 
 const mapContainer = ref(null);
@@ -15,7 +14,7 @@ onMounted(() => {
     container: mapContainer.value,
     style: 'mapbox://styles/mapbox/streets-v11',
     center: [106.865036, -6.175110],
-    zoom: 12
+    zoom: 5
   });
 
   // Add code here to display the KRL route on the map using mapbox-gl
@@ -35,6 +34,9 @@ onMounted(() => {
       coordinates: routeCoordinates
     }
   };
+  map.value.on('idle',function(){
+    map.value.resize()
+  })
 
   map.value.on('load', () => {
     map.value.addSource('route', {
@@ -68,12 +70,13 @@ onUnmounted(() => {
 
 <style scoped>
 .map-container {
-  position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  width: 100%;
-  height: 100%;
+  margin-top: 30px;
+  height: 600px;
+  max-width: 600px;
+  overflow: visible;
 }
 </style>
