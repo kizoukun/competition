@@ -77,12 +77,12 @@ const router = createRouter({
         props: route => ({ message: route.query.message })
     },
       {
-          path: '/krl',
+          path: '/track/krl',
           name: 'KRLView',
           component: KRLView
       },
       {
-          path: '/mrt',
+          path: '/track/mrt',
           name: 'MRTView',
           component: MRTView
       }

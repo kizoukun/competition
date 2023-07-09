@@ -35,9 +35,9 @@ onMounted(async () => {
       <div>
         <div class="grid grid-cols-2 gap-11">
           <div class="flex flex-col items-center">
-            <div class="bg-[#E8FCFC] p-8 rounded-[30px] shadow-black drop-shadow-xl text-red-500">
+            <router-link to="/track/krl" class="bg-[#E8FCFC] p-8 rounded-[30px] shadow-black drop-shadow-xl text-red-500">
               <FontAwesomeIcon icon="train" size="7x"/>
-            </div>
+            </router-link>
               <p class="text-sm text-center">KRL</p>
           </div>
           <div class="flex flex-col items-center">
@@ -47,9 +47,9 @@ onMounted(async () => {
             <p class="text-sm text-center">BUS</p>
           </div>
           <div class="flex flex-col items-center">
-            <div class="bg-[#E8FCFC] p-8 rounded-[30px] shadow-black drop-shadow-xl text-green-500">
+            <router-link to="/track/mrt" class="bg-[#E8FCFC] p-8 rounded-[30px] shadow-black drop-shadow-xl text-green-500">
               <FontAwesomeIcon icon="subway" size="7x"/>
-            </div>
+            </router-link>
             <p class="text-sm text-center">MRT</p>
           </div>
           <div class="flex flex-col items-center">
