@@ -26,4 +26,19 @@ router.get("/balance", async (req, res) => {
     }});
 });
 
+router.get("/balance/history", async (req, res) => {
+    const balanceHistory = await BalanceHistory.find({userId: req.user.id}).sort({createdAt: -1});
+    return res.json({success: true, message: "Getting balance history", data: balanceHistory.map((history) => {
+            return {
+                balanceBefore: history.balanceBefore,
+                balanceAfter: history.balanceAfter,
+                amount: history.amount,
+                type: history.type,
+                description: history.description,
+                createdAt: history.createdAt
+            }
+        })
+    });
+});
+
 module.exports = router;

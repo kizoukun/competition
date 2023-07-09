@@ -15,7 +15,7 @@ onMounted(async () => {
       <div class="bg-[#0F827B] rounded-xl p-3 text-white grid grid-cols-5 gap-5">
         <div class="col-span-2 bg-white text-black p-2 rounded-lg font-medium">
           <div v-if="balance !== undefined">
-            <router-link to="/topup">Rp{{ parseInt(balance).toLocaleString('ID-id') }}</router-link>
+            <router-link to="/balance">Rp{{ parseInt(balance).toLocaleString('ID-id') }}</router-link>
             <p class="text-red-500 text-sm font-medium" v-if="balance < 10000">Low Balance</p>
           </div>
           <div v-else>

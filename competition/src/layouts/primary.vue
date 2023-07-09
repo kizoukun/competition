@@ -1,7 +1,9 @@
 <script>
 import { defineComponent } from 'vue';
+import Spinner from "@/components/Spinner.vue";
 
 export default defineComponent({
+  components: {Spinner},
   props: {
     pageTitle: {
       type: String,
@@ -16,6 +18,11 @@ export default defineComponent({
       type: Boolean,
       required: false,
       default: false
+    },
+    isLoading: {
+      type: Boolean,
+      required: false,
+      default: false
     }
   }
 })
@@ -26,6 +33,7 @@ export default defineComponent({
       <router-link :to="backLink"><font-awesome-icon icon="fa-solid fa-arrow-left-long"></font-awesome-icon></router-link>
       <h1>{{  pageTitle }}</h1>
     </div>
-    <slot />
+    <Spinner v-if="isLoading" />
+    <slot v-if="!isLoading" />
   </div>
 </template>

@@ -6,6 +6,7 @@ import NotFound from "@/components/NotFound.vue";
 import { isAuthenticated } from '@/stores/api';
 import KRLView from "@/views/KRLView.vue";
 import MRTView from "@/views/MRTView.vue";
+import BalanceView from "@/views/BalanceView.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -71,21 +72,26 @@ const router = createRouter({
       }
     },
     {
-        path: "/:pathMatch(.*)*",
-        name: "notFound",
-        component: NotFound,
-        props: route => ({ message: route.query.message })
+      path: '/track/krl',
+      name: 'KRLView',
+      component: KRLView
     },
-      {
-          path: '/track/krl',
-          name: 'KRLView',
-          component: KRLView
-      },
-      {
-          path: '/track/mrt',
-          name: 'MRTView',
-          component: MRTView
-      }
+    {
+      path: '/track/mrt',
+      name: 'MRTView',
+      component: MRTView
+    },
+    {
+      path: "/balance",
+      name: "BalanceView",
+      component: BalanceView
+    },
+    {
+      path: "/:pathMatch(.*)*",
+      name: "notFound",
+      component: NotFound,
+      props: route => ({ message: route.query.message })
+    },
   ]
 })
 
