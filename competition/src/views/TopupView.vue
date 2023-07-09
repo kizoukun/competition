@@ -1,5 +1,8 @@
 <script setup>
 import { ref } from 'vue';
+import api from '@/stores/api';
+import router from '@/router';
+import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
 const amountTopup = ref(null);
 const paymentType = ref(null);
 const error = ref(null);
@@ -43,6 +46,22 @@ async function topup() {
     loading.value = false;
     return;
   }
+  api.post("/transactions/create", {
+    amount: amountTopup.value,
+    paymentType: paymentType.value,
+  }).then((response) => {
+    console.log(response);
+    if(response.data.success) {
+      router.push('/topup/' + response.data.data.id);
+    } else {
+      error.value = response.data.message;
+    }
+  }).catch((error) => {
+    console.error(error);
+    error.value = error.message;
+  }).finally(() => {
+    loading.value = false;
+  })
 }
 
 </script>
@@ -78,7 +97,7 @@ async function topup() {
           :disabled="amountTopup == null || paymentType == null"
           @click="topup"
       >
-        Topup
+        <FontAwesomeIcon v-if="loading" icon="fa-solid fa-circle-notch" spin class="mr-2" />Topup
       </button>
     </section>
   </PrimaryLayout>

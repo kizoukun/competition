@@ -64,12 +64,3 @@ onMounted(async () => {
     </div>
   </SecondaryLayout>
 </template>
-
-<style scoped>
-.text-4xl {
-  font-size: 2.5rem;
-}
-.text-sm {
-  font-size: 0.875rem;
-}
-</style>

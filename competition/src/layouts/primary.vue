@@ -11,13 +11,18 @@ export default defineComponent({
       type: String,
       required: false,
       default: "/"
+    },
+    removePadding: {
+      type: Boolean,
+      required: false,
+      default: false
     }
   }
 })
 </script>
 <template>
-  <div class="flex flex-col p-3 min-h-screen">
-    <div class="flex gap-4">
+  <div :class="{'p-3': !removePadding }" class="flex flex-col min-h-screen">
+    <div :class="{'p-3': removePadding }" class="flex gap-4">
       <router-link :to="backLink"><font-awesome-icon icon="fa-solid fa-arrow-left-long"></font-awesome-icon></router-link>
       <h1>{{  pageTitle }}</h1>
     </div>

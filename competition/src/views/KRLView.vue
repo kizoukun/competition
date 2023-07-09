@@ -1,5 +1,5 @@
 <template>
-  <PrimaryLayout page-title="KRL">
+  <PrimaryLayout page-title="KRL" :remove-padding="true">
     <div class="min-h-screen flex flex-col">
       <!-- Your KRL view content goes here -->
       <Map />
@@ -10,11 +10,8 @@
 
 <script setup>
 import Map from "@/components/Map.vue";
-import { logout } from '@/stores/api';
 import { onMounted, ref } from "vue";
 import { useUserStore } from '@/stores/globalVars';
-import Primary from "@/layouts/primary.vue";
-import PrimaryLayout from "@/layouts/primary.vue";
 
 const user = useUserStore();
 const balance = ref(null);

@@ -1,13 +1,14 @@
 <script setup>
 import {onMounted, ref} from 'vue';
 import { useRouter } from "vue-router";
-import NotFound from "@/components/NotFound.vue";
 import api from "@/stores/api";
-// console.log(this.$route.params)
+import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
 const route = useRouter();
 const transaction = ref(null);
+const loading = ref(false);
 const params = route.currentRoute.value.params;
-onMounted(async () => {
+function check() {
+  loading.value = true;
   api.get("/transactions/" + params.id).then((res) => {
     if(res.data.success) {
       transaction.value = res.data.data;
@@ -23,7 +24,13 @@ onMounted(async () => {
   .catch((err) => {
     console.error(err);
     route.push({name: "notFound", params: {message: "Terjadi kesalahan pada server"}});
-  });
+  })
+  .finally(() => {
+    loading.value = false;
+  })
+}
+onMounted(async () => {
+  check();
 })
 </script>
 
@@ -38,7 +45,7 @@ onMounted(async () => {
       <p>Rp{{ parseInt(transaction.amount).toLocaleString("ID-id")}}</p>
     </section>
     <section>
-      <button type="button" class="bg-green-600 p-2 w-full text-center rounded-lg text-white">Check Status</button>
+      <button type="button" @click="check()" :disabled="loading" class="disabled:bg-gray-300 bg-green-600 p-2 w-full text-center rounded-lg text-white"><FontAwesomeIcon v-if="loading" icon="fa-solid fa-circle-notch" spin class="mr-2" />Check Status</button>
     </section>
   </PrimaryLayout>
 </template>
