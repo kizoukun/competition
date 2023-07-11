@@ -63,7 +63,7 @@ const router = createRouter({
     {
       path: '/topup/:id',
       name: 'topupId',
-      component: () => import('../views/PayView.vue'),
+      component: () => import('../views/TopupPayView.vue'),
       beforeEnter: async (to, from, next) => {
           if(!await isAuthenticated()) {
               return next({name: 'login'});

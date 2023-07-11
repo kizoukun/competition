@@ -14,7 +14,9 @@ onMounted(async () => {
       <div class="bg-[#0F827B] rounded-xl p-3 text-white grid grid-cols-5 gap-5">
         <div class="col-span-2 bg-white text-black p-2 rounded-lg font-medium">
           <router-link to="/balance" v-if="balance !== undefined">
+            <p>Your Balance</p>
             <p>Rp{{ parseInt(balance).toLocaleString('ID-id') }}</p>
+            <p class="text-yellow-500">Check History</p>
             <p class="text-red-500 text-sm font-medium" v-if="balance < 10000">Low Balance</p>
           </router-link>
           <div v-else>
@@ -22,17 +24,22 @@ onMounted(async () => {
           </div>
         </div>
         <div class="flex justify-center items-center">
-          <router-link to="/balance">
+          <router-link to="/pay" class="text-center">
             <FontAwesomeIcon icon="credit-card" size="2x"/>
+            <p>Pay</p>
           </router-link>
         </div>
         <div class="flex justify-center items-center">
-          <router-link to="/topup">
+          <router-link to="/topup" class="text-center">
             <FontAwesomeIcon icon="circle-plus" size="2x"/>
+            <p>Topup</p>
           </router-link>
         </div>
         <div class="flex justify-center items-center">
-          <p>Explore</p>
+          <router-link to="/balance" class="text-center">
+            <FontAwesomeIcon icon="fa-solid fa-clock-rotate-left" size="2x"/>
+            <p>History</p>
+          </router-link>
         </div>
       </div>
       <div>
