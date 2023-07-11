@@ -40,9 +40,8 @@ onMounted(async () => {
       <div class="w-full p-3 flex justify-center" v-if="transaction.qrImage">
         <img :src="transaction.qrImage" class="" alt="QR Code">
       </div>
-      <h1>{{ transaction.paymentName }}</h1>
-      <h1>{{ transaction.status.toUpperCase() }}</h1>
-      <p>Rp{{ parseInt(transaction.amount).toLocaleString("ID-id")}}</p>
+      <h1 class="text-lg font-bold text-center">STATUS: {{ transaction.status.toUpperCase() }}</h1>
+      <p class="text-lg font-bold text-center">Topup Amount: Rp{{ parseInt(transaction.amount).toLocaleString("ID-id")}}</p>
     </section>
     <section>
       <button type="button" @click="check()" :disabled="loading" class="disabled:bg-gray-300 bg-green-600 p-2 w-full text-center rounded-lg text-white"><FontAwesomeIcon v-if="loading" icon="fa-solid fa-circle-notch" spin class="mr-2" />Check Status</button>
