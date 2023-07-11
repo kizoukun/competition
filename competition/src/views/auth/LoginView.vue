@@ -36,6 +36,7 @@ async function login() {
 </script>
 <template>
     <div class="min-h-screen flex flex-col items-center justify-center p-8 space-y-4">
+        <img src="/login.svg" alt="Login Now" class="w-96" />
         <h1 class="text-3xl font-bold">Login Now</h1>
         <p class="text-gray-500 text-lg font-medium">Please enter the details below to continue</p>
         <form @submit.prevent="login" class="space-y-4 w-full">
