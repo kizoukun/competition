@@ -11,6 +11,7 @@ import TopupView from "@/views/TopupView.vue";
 import TopupPayView from "@/views/TopupPayView.vue";
 import PayView from "@/views/PayView.vue";
 import OrdersView from "@/views/OrdersView.vue";
+import BUSView from "@/views/BUSView.vue";
 
 
 async function authenticated(to, from, next) {
@@ -76,6 +77,12 @@ const router = createRouter({
       path: '/track/krl',
       name: 'KRLView',
       component: KRLView,
+      beforeEnter: authenticated
+    },
+    {
+      path: '/track/bus',
+      name: 'BUSView',
+      component: BUSView,
       beforeEnter: authenticated
     },
     {

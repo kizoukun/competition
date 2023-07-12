@@ -51,9 +51,9 @@ onMounted(async () => {
               <p class="text-lg font-bold mt-2 text-center">KRL</p>
           </div>
           <div class="flex flex-col items-center">
-            <div class="bg-[#E8FCFC] p-8 rounded-[30px] shadow-black drop-shadow-xl text-yellow-200">
+            <router-link to="/track/bus" class="bg-[#E8FCFC] p-8 rounded-[30px] shadow-black drop-shadow-xl text-yellow-200">
               <FontAwesomeIcon icon="bus" size="7x"/>
-            </div>
+            </router-link>
             <p class="text-lg font-bold mt-2 text-center">BUS</p>
           </div>
           <div class="flex flex-col items-center">
