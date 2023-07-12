@@ -1,11 +1,11 @@
 <template>
-  <PrimaryLayout page-title="KRL" :remove-padding="true">
+  <PrimaryLayout page-title="BUS" :remove-padding="true">
     <div class="min-h-screen flex flex-col">
       <Map/>
 
       <div class="warning-container">
         <div class="bg-gray-800 rounded-[22px] p-4 mb-4 opacity-95 text-white">
-          <p class="text-center text-sm">Select Destination and Live Commuter Position features are currently under development.</p>
+          <p class="text-center text-sm">BUS Feature Under Development.</p>
         </div>
       </div>
 
@@ -22,7 +22,7 @@
 </template>
 
 <script setup>
-import Map from "@/components/MapKRL.vue";
+import Map from "@/components/MapBUS.vue";
 import { onMounted, ref } from "vue";
 import { useUserStore } from '@/stores/globalVars';
 
@@ -54,9 +54,9 @@ setTimeout(() => {
 
 .warning-container {
   position: absolute;
-  top: 5rem;
+  top: 25rem;
   left: 50%;
   transform: translateX(-50%);
-  animation: fade 10s infinite;
+  animation: fade 0s infinite;
 }
 </style>
