@@ -14,7 +14,7 @@
             ref="searchInput"
             class="w-full rounded-full p-2 text-zinc-800 focus:ring-opacity-0 focus:ring-0 focus:ring-offset-0"
             :class="{ 'pl-10': isSearchBarActive }"
-            placeholder="Find services, food, places"
+            placeholder="Find services, transporation and more"
             @focus="activateSearchBar"
             @blur="deactivateSearchBar"
         />

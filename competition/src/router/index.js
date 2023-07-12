@@ -7,6 +7,25 @@ import { isAuthenticated } from '@/stores/api';
 import KRLView from "@/views/KRLView.vue";
 import MRTView from "@/views/MRTView.vue";
 import BalanceView from "@/views/BalanceView.vue";
+import TopupView from "@/views/TopupView.vue";
+import TopupPayView from "@/views/TopupPayView.vue";
+import PayView from "@/views/PayView.vue";
+import OrdersView from "@/views/OrdersView.vue";
+
+
+async function authenticated(to, from, next) {
+  if(!await isAuthenticated()) {
+      return next({name: 'login'});
+  }
+  next();
+}
+
+async function notAuthenticated(to, from, next) {
+  if(await isAuthenticated()) {
+      return next({name: 'home'});
+  }
+  next();
+}
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -15,76 +34,61 @@ const router = createRouter({
       path: '/',
       name: 'home',
       component: HomeView,
-        beforeEnter: async (to, from, next) => {
-            if(!await isAuthenticated()) {
-                return next({name: 'login'});
-            }
-            next();
-        }
+      beforeEnter: authenticated
     },
     {
       path: '/auth/login',
       name: 'login',
       component: LoginView,
-      beforeEnter: async (to, from, next) => {
-        if(await isAuthenticated()) {
-            return next({name: 'home'});
-        }
-        next();
-      }
+      beforeEnter: notAuthenticated
     },
     {
         path: '/auth/register',
         name: 'register',
         component: RegisterView,
-        beforeEnter: async (to, from, next) => {
-            if(await isAuthenticated()) {
-                return next({name: 'home'});
-            }
-            next();
-        }
+        beforeEnter: notAuthenticated
     },
     {
-      path: '/about',
-      name: 'about',
-      component: () => import('../views/AboutView.vue')
+      path: '/pay',
+      name: 'pay',
+      component: PayView,
+      beforeEnter: authenticated
+    },
+    {
+      path: '/orders',
+      name: 'orders',
+      component: OrdersView,
+      beforeEnter: authenticated
     },
     {
       path: '/topup',
       name: 'topup',
-      component: () => import('../views/TopupView.vue'),
-        beforeEnter: async (to, from, next) => {
-            if(!await isAuthenticated()) {
-                return next({name: 'login'});
-            }
-            next();
-        }
+      component: TopupView,
+      beforeEnter: authenticated
     },
     {
       path: '/topup/:id',
       name: 'topupId',
-      component: () => import('../views/TopupPayView.vue'),
-      beforeEnter: async (to, from, next) => {
-          if(!await isAuthenticated()) {
-              return next({name: 'login'});
-          }
-          next();
-      }
+      component: TopupPayView,
+      beforeEnter: authenticated
     },
     {
       path: '/track/krl',
       name: 'KRLView',
-      component: KRLView
+      component: KRLView,
+      beforeEnter: authenticated
     },
     {
       path: '/track/mrt',
       name: 'MRTView',
-      component: MRTView
+      component: MRTView,
+      beforeEnter: authenticated
     },
     {
       path: "/balance",
       name: "BalanceView",
-      component: BalanceView
+      component: BalanceView,
+      beforeEnter: authenticated
     },
     {
       path: "/:pathMatch(.*)*",

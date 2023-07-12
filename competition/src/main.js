@@ -9,9 +9,9 @@ import SecondaryLayout from '@/layouts/secondary.vue';
 import PrimaryLayout from '@/layouts/primary.vue';
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import { faArrowLeftLong, faTrain, faBus, faSubway, faCirclePlus, faCreditCard, faCircleNotch, faClockRotateLeft } from '@fortawesome/free-solid-svg-icons'
+import { faArrowLeftLong, faTrain, faBus, faSubway, faCirclePlus, faCreditCard, faCircleNotch, faClockRotateLeft, faCoins, faMoneyBill, faMoneyBills, faMoneyBill1, faSquarePlus, faCircleCheck, faTicketSimple, faTicket } from '@fortawesome/free-solid-svg-icons'
 
-library.add(faArrowLeftLong, faTrain, faBus, faSubway, faCirclePlus, faCreditCard, faCircleNotch, faClockRotateLeft);
+library.add(faArrowLeftLong, faTrain, faBus, faSubway, faCirclePlus, faCreditCard, faCircleNotch, faClockRotateLeft, faCoins, faMoneyBill, faMoneyBills, faMoneyBill1, faSquarePlus, faCircleCheck, faTicketSimple, faTicket);
 
 const app = createApp(App)
 

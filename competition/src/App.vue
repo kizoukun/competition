@@ -16,6 +16,8 @@ onMounted(async () => {
 
 <template>
   <div class="max-w-[600px] mx-auto bg-white min-h-screen" v-if="!loading">
-    <RouterView />
+    <RouterView v-slot="{ Component }">
+        <component :is="Component" />
+    </RouterView>
   </div>
 </template>

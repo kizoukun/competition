@@ -14,22 +14,20 @@ function setAmount(amount) {
 
 const listAmounts = ref([
   {
-    "amount": "19000",
+    "amount": "10000",
+    "icon": "fa-solid fa-coins"
   },
   {
-    "amount": "49000",
+    "amount": "20000",
+    "icon": "fa-solid fa-money-bill"
   },
   {
-    "amount": "99000",
+    "amount": "50000",
+    "icon": "fa-solid fa-money-bill-1"
   },
   {
-    "amount": "190000",
-  },
-  {
-    "amount": "490000",
-  },
-  {
-    "amount": "990000",
+    "amount": "100000",
+    "icon": "fa-solid fa-money-bills"
   }
 ]);
 
@@ -70,21 +68,32 @@ async function topup() {
   <PrimaryLayout page-title="Topup">
     <section class="flex-1 space-y-4">
       <div>
-        <h1 class="text-lg">Choose an amount</h1>
-        <div class="grid grid-cols-3 gap-5">
-          <div v-for="(list, index) of listAmounts" :key="index" @click="setAmount(list.amount)" class="bg-white shadow-lg rounded-lg p-2">
-            Rp{{ parseInt(list.amount).toLocaleString('ID-id') }}
+        <h1 class="text-lg font-medium">Choose an amount</h1>
+        <div class="grid grid-cols-2 gap-5 p-5">
+          <div v-for="(list, index) of listAmounts" :key="index" @click="setAmount(list.amount)" class="bg-gray-100 shadow-lg rounded-[40px] p-5">
+            <div class="text-center space-y-4">
+              <FontAwesomeIcon :icon="list.icon" size="3x" class="text-yellow-500" />
+              <p class="text-lg font-medium">Rp{{ parseInt(list.amount).toLocaleString('ID-id') }}</p>
+            </div>
           </div>
         </div>
       </div>
       <div>
-        <input type="number" v-model="amountTopup" placeholder="Atau tulis jumlah" class="border border-black p-2 rounded-lg" />
+        <div class="flex items-center">
+          <FontAwesomeIcon icon="fa-solid fa-square-plus" size="2x" class="text-yellow-500 mr-4" />
+          <input type="number" v-model="amountTopup" placeholder="Atau tulis jumlah" class="text-md font-medium w-full rounded-xl p-2 border border-black bg-gray-200" />
+        </div>
       </div>
       <div>
-        <div>
-          <h1 class="text-lg">Payment Method</h1>
-          <div class="bg-white shadow-lg rounded-lg p-2" @click="paymentType = 'QRIS'">
-            QRIS
+        <div class="space-y-4">
+          <h1 class="text-lg font-medium">Payment Method</h1>
+          <div class="bg-white shadow-lg rounded-lg p-2 flex justify-between items-center" @click="paymentType = 'QRIS'">
+            <p>QRIS</p>
+            <FontAwesomeIcon icon="fa-solid fa-circle-check" class="text-green-500 text-2xl" v-if="paymentType == 'QRIS'" />
+          </div>
+          <div class="bg-white shadow-lg rounded-lg p-2 flex justify-between items-center" @click="paymentType = 'BNIVA'">
+            <p>BNI Virtual Account</p>
+            <FontAwesomeIcon icon="fa-solid fa-circle-check" class="text-green-500 text-2xl" v-if="paymentType == 'BNIVA'" />
           </div>
         </div>
       </div>
